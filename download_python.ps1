@@ -39,6 +39,7 @@ if (-not (Test-Path $python_dir)) {
 Set-Location $python_dir
 
 # Download Python
+Write-Host "`nDownloading and Installing Python`n"
 Invoke-WebRequest -Uri $python_url -OutFile $zip_file
 
 # Extract the archive
@@ -50,7 +51,16 @@ Move-Item -Path $py_name\python$append_ver._pth -Destination $py_name\python$app
 
 # Download & install pip
 Set-Location $py_name
-Invoke-WebRequest -Uri "https://bootstrap.pypa.io/pip/$pip_ver/get-pip.py" -OutFile "get-pip.py"
+
+Write-Host "`nDownloading and Installing pip`n"
+try {
+    Invoke-WebRequest -Uri "https://bootstrap.pypa.io/pip/$pip_ver/get-pip.py" -OutFile "get-pip.py"
+}
+catch {
+    Write-Host "`nCouldn't find the specific version of pip. Downloading the latest version`n"
+    Invoke-WebRequest -Uri "https://bootstrap.pypa.io/pip/get-pip.py" -OutFile "get-pip.py"
+}
+
 .\python.exe get-pip.py --no-warn-script-location
 
 # Remove the downloaded files
@@ -59,6 +69,7 @@ Remove-Item ..\$zip_file
 
 # Install virtualenv if required
 if ($env_req -eq "y") {
+    Write-Host "`nCreating virtual environment`n"
     .\python.exe -m pip install virtualenv --no-warn-script-location
     .\python.exe -m virtualenv ..\$env
     Copy-Item -Path .\python$append_ver.zip -Destination ..\$env\Scripts\
