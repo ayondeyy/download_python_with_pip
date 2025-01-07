@@ -1,9 +1,9 @@
 # This script downloads and installs Python along with pip on Windows. It also creates a virtual environment if required.
 
-$ver = Read-Host "Enter Python Version (in x.x format)"
-$arch = Read-Host "Enter Python Architecture [win32 / amd64 / arm64 (Default: amd64)]"
 $proj_name = Read-Host "Enter Project Name"
 $path = Read-Host "Enter Path to create the project"
+$ver = Read-Host "Enter Python Version (in x.x format)"
+$arch = Read-Host "Enter Python Architecture [win32 / amd64 / arm64 (Default: amd64)]"
 $env_req = Read-Host "Do you want to create Virtual Environment? [y/n (Default: y)]"
 
 # Set default values if not provided
