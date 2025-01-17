@@ -92,12 +92,12 @@ irrespective of the OS.
 
 #### 4. Testing pip:
 
-- If virutal environment is activated:
+- If virtual environment is activated:
 ```bash
 pip install numpy
 ```
 
-- If virutal environment is not activated:
+- If virtual environment is not activated:
     - For Windows:
         ```bash
         [project-folder\python-folder]\python.exe -m pip install numpy
